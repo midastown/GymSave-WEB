@@ -2,17 +2,17 @@ const mongoose = require('mongoose')
 
 const sessionSchema = mongoose.Schema({
     exercise: {
-        type: String,
+        type: [String],
         required: true
     },
 
     repetitions: {
-        type: String,
+        type: [String],
         required: true
     },
 
     series: {
-        type: String,
+        type: [String],
         required: true
     },
 

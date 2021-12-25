@@ -9,11 +9,20 @@ router.get('/', (req, res) => {
 // Post a session onto the session database in mongoDB
 router.post('/create-session', async (req, res) => {
 
-    console.log(req.body)
+    let reqExercises = []
+    let reqRepetitions = []
+    let reqSeries = []
+
+    for (var i = 0; i < req.body.exerciseIndex; i++) {
+        reqExercises.push(req.body.exercise[i])
+        reqRepetitions.push(req.body.repetitions[i])
+        reqSeries.push(req.body.series[i])
+    }
+
     const session = new Session({
-        exercise: req.body.exercise,
-        repetitions: req.body.repetitions,
-        series: req.body.series
+        exercise: reqExercises,
+        repetitions: reqRepetitions,
+        series: reqSeries
     })
     
     try {
