@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
-const schema = mongoose.Schema()
 
-const sessionSchema = schema({
+const sessionSchema = mongoose.Schema({
     exercise: {
         type: String,
         required: true
@@ -18,10 +17,10 @@ const sessionSchema = schema({
     },
 
     date: {
-        type: Date
+        type: Date,
         required: true,
         default: new Date()
     }
 })
 
-module.exports = mongoose.mode('Session', sessionSchema)
+module.exports = mongoose.model('Session', sessionSchema)

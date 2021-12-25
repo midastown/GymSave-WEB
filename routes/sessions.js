@@ -5,6 +5,7 @@ const Session = require('../models/session')
 // Post a session onto the session database in mongoDB
 router.post('/create-session', async (req, res) => {
 
+    console.log(req.body)
     const session = new Session({
         exercise: req.body.exercise,
         repetitions: req.body.repetitions,
@@ -14,9 +15,11 @@ router.post('/create-session', async (req, res) => {
     try {
         // mongoose call to store item in database
         const newSession = await session.save()
-        res.render('sessions/session-success')
+        res.render('sessions/success-create')
     } catch (e) {
         res.status(500).json({message: e.message})
     }
 
 })
+
+module.exports = router

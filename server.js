@@ -14,9 +14,14 @@ db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('connected to database'))
 
 
+app.use(bodyParser.urlencoded({extended: true}))
+
 
 const indexRouter = require('./routes/index')
 app.use('/', indexRouter)
+
+const sessionRouter = require('./routes/sessions')
+app.use('/sessions', sessionRouter)
 
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
