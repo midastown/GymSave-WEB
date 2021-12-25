@@ -5,6 +5,16 @@ const Session = require('../models/session')
 router.get('/', (req, res) => {
     res.render('sessions/index')
 })
+// get all sessions
+router.get('/all-sessions', async (req, res) => {
+    try{
+        const sessions = await Session.find()
+        res.render('sessions/all-sessions', {sessionsData: sessions})
+    } catch (e) {
+        res.status(500).json({message: e.message})
+    }
+})
+
 
 // Post a session onto the session database in mongoDB
 router.post('/create-session', async (req, res) => {
@@ -34,5 +44,6 @@ router.post('/create-session', async (req, res) => {
     }
 
 })
+
 
 module.exports = router
