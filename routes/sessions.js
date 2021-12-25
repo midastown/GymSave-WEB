@@ -2,6 +2,10 @@ const express = require('express')
 const router = express.Router()
 const Session = require('../models/session')
 
+router.get('/', (req, res) => {
+    res.render('sessions/index')
+})
+
 // Post a session onto the session database in mongoDB
 router.post('/create-session', async (req, res) => {
 
