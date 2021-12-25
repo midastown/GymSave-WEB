@@ -11,8 +11,15 @@
     <form action="search-by-date" method="get">
         <label for="date_pick">Gym session date:</label>
         <input type="date" id="date_pick" name="date_picked" value=<% new Date().toDateString() %>>
+        <label for="range">Add range</label>
+        <input type="radio" id="range">
+        <input type="hidden" id="range_number" name="range" value="0">
         <input type="submit" value="Search">
     </form>
+
+    <script>
+        document.getElementById("range").addEventListener("click", function() {document.getElementById("range_number").setAttribute("type", "number")});
+    </script>
 
 </body>
 </html>

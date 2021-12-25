@@ -12,33 +12,30 @@ router.get('/search-sessions', (req, res) => {
     res.render('sessions/search-sessions')
 })
 
-// temp
-const getMethods = (obj) => {
-  let properties = new Set()
-  let currentObj = obj
-  do {
-    Object.getOwnPropertyNames(currentObj).map(item => properties.add(item))
-  } while ((currentObj = Object.getPrototypeOf(currentObj)))
-  return [...properties.keys()].filter(item => typeof obj[item] === 'function')
-}
 
 // Search by date
 router.get('/search-by-date', async (req, res) => {
-    let range = 1
+
+    let range = parseInt(req.query.range)
     let datePicked = req.query.date_picked.split('-')
+    // months start at 0... Date(yyyy,mm,dd)
+    let start = new Date(datePicked[0], datePicked[1] - 1 , datePicked[2])
+    let end = new Date(datePicked[0], datePicked[1] - 1 , datePicked[2] + 1)
+    // adding range to date
+    end = end.setDate(end.getDate() + range)
 
 
     try {
         const sessions = await Session.find({
-            date: { // months start at 0
-                $gte: new Date(datePicked[0], datePicked[1] - 1 , datePicked[2]),
-                $lt: new Date(datePicked[0], datePicked[1] - 1, datePicked[2] + range)
+            date: { 
+                $gte: start, 
+                $lt: end 
             }
         })
         if (sessions.toString() == "") {
             res.json({message: "no sessions were found for the coresponding date"})
         } else {
-            res.json(sessions)
+            res.render('sessions/sessions-by-date', {data: {sessionsData: sessions, startDate: start, endDate: new Date(end)}})
         }
     } catch (e) {
         res.status(500).json({message: e.message})
