@@ -1,29 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gym Save</title>
-</head>
-<body>
-    <h1>Create a session</h1>
-    <form action="/sessions/create-session" method="post">
-        <input type="text" name="exercise[]" placeholder="exercise">
-        <input type="text" name="repetitions[]" placeholder="repetitions">
-        <input type="text" name="series[]" placeholder="series">
-        <button id="addBtn" type="button">+</button>
-        <input type="hidden" id="exerciseIndex" name="exerciseIndex" value=1>
-        <input type="submit" value="Submit">
-        
-    </form>
+<h1>Create a session</h1>
+<form action="/sessions/create-session" method="post">
+    <input type="text" name="exercise[]" placeholder="exercise">
+    <input type="text" name="repetitions[]" placeholder="repetitions">
+    <input type="text" name="series[]" placeholder="series">
+    <button id="addBtn" type="button">+</button>
+    <input type="hidden" id="exerciseIndex" name="exerciseIndex" value=1>
+    <input type="submit" value="Submit">
     
-    <script>
-        document.getElementById("exerciseIndex").setAttribute("value", "1");
-        document.getElementById("addBtn").addEventListener("click", function() {document.getElementById("addBtn").insertAdjacentHTML('beforebegin', '</br><input type="text" name="exercise[]" placeholder="exercise"> <input type="text" name="repetitions[]" placeholder="repetitions">  <input type="text" name="series[]" placeholder="series">');
-            var index = document.getElementById("exerciseIndex");
-            index.value++;
-        });
-    </script>
-</body>
-</html>
+</form>
+
+<script>
+    document.getElementById("exerciseIndex").setAttribute("value", "1");
+    document.getElementById("addBtn").addEventListener("click", function() {document.getElementById("addBtn").insertAdjacentHTML('beforebegin', '</br><input type="text" name="exercise[]" placeholder="exercise"> <input type="text" name="repetitions[]" placeholder="repetitions">  <input type="text" name="series[]" placeholder="series">');
+        var index = document.getElementById("exerciseIndex");
+        index.value++;
+    });
+</script>

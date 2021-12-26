@@ -1,24 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gym Save</title>
-</head>
-<body>
-    <h1>Getting sessions from <%= data.startDate.toDateString() %> to <%= data.endDate.toDateString() %></h1>
-    <table>
-        <% for (var i=0; i < data.sessionsData.length; i++) { %>
-        <tr>
-            <td><%= data.sessionsData[i].exercise %></td>
-            <td><%= data.sessionsData[i].repetitions %></td>
-            <td><%= data.sessionsData[i].series %></td>
-        </tr>
-        <% } %>
-    </table>
-
-
-
-</body>
-</html>
+<h1>Getting sessions from <%= data.startDate.toDateString() %> to <%= data.endDate.toDateString() %></h1>
+<table>
+    <% for (var i=0; i < data.sessionsData.length; i++) { %>
+    <tr>
+        <td><%= data.sessionsData[i].exercise %></td>
+        <td><%= data.sessionsData[i].repetitions %></td>
+        <td><%= data.sessionsData[i].series %></td>
+    </tr>
+    <% } %>
+</table>
