@@ -2,6 +2,13 @@ const express = require('express')
 const router = express.Router()
 const Session = require('../models/session')
 
+Date.prototype.addDays = function(days){
+    return new Date(this.valueOf() + (days * 60 * 60 * 24 * 1000))
+}
+
+
+////// ROUTES ///////////
+
 // Index page
 router.get('/', (req, res) => {
     res.render('sessions/index')
@@ -12,18 +19,14 @@ router.get('/search-sessions', (req, res) => {
     res.render('sessions/search-sessions')
 })
 
-
 // Search by date
 router.get('/search-by-date', async (req, res) => {
 
     let range = parseInt(req.query.range)
-    let datePicked = req.query.date_picked.split('-')
+    let datePicked = req.query.date_picked.split('-').map(Number)
     // months start at 0... Date(yyyy,mm,dd)
     let start = new Date(datePicked[0], datePicked[1] - 1 , datePicked[2])
-    let end = new Date(datePicked[0], datePicked[1] - 1 , datePicked[2] + 1)
-    // adding range to date
-    end = end.setDate(end.getDate() + range)
-
+    let end = start.addDays(range == 0 ? 1 : range) 
 
     try {
         const sessions = await Session.find({
@@ -35,17 +38,14 @@ router.get('/search-by-date', async (req, res) => {
         if (sessions.toString() == "") {
             res.json({message: "no sessions were found for the coresponding date"})
         } else {
-            res.render('sessions/sessions-by-date', {data: {sessionsData: sessions, startDate: start, endDate: new Date(end)}})
+            res.render('sessions/sessions-by-date', {data: {sessionsData: sessions, startDate: start, endDate: end}})
         }
     } catch (e) {
         res.status(500).json({message: e.message})
     }
-
-    
-
 })
 
-// get all sessions
+// Get all sessions
 router.get('/all-sessions', async (req, res) => {
     try{
         const sessions = await Session.find()
@@ -56,7 +56,7 @@ router.get('/all-sessions', async (req, res) => {
 })
 
 
-// Post a session onto the session database in mongoDB
+// Post a session 
 router.post('/create-session', async (req, res) => {
 
     let reqExercises = []
@@ -76,7 +76,6 @@ router.post('/create-session', async (req, res) => {
     })
     
     try {
-        // mongoose call to store item in database
         const newSession = await session.save()
         res.render('sessions/success-create')
     } catch (e) {
