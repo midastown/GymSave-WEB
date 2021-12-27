@@ -1,0 +1,18 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Session Date</th>
+            <th scope="col">Exercise</th>
+            <th scope="col">Repetitions</th>
+            <th scope="col">Series</th>
+        </tr>
+    </thead>
+    <% for (var i=0; i < data.sessionsData.length; i++) { %>
+    <tr>
+        <th scope="row"><%= data.sessionsData[i].date.toDateString() %></th>
+        <td><%= data.sessionsData[i].exercise %></td>
+        <td><%= data.sessionsData[i].repetitions %></td>
+        <td><%= data.sessionsData[i].series %></td>
+    </tr>
+    <% } %>
+</table>

@@ -1,10 +1,2 @@
 <h1>Getting sessions from <%= data.startDate.toDateString() %> to <%= data.endDate.toDateString() %></h1>
-<table>
-    <% for (var i=0; i < data.sessionsData.length; i++) { %>
-    <tr>
-        <td><%= data.sessionsData[i].exercise %></td>
-        <td><%= data.sessionsData[i].repetitions %></td>
-        <td><%= data.sessionsData[i].series %></td>
-    </tr>
-    <% } %>
-</table>
+<%- include('../partials/table.ejs') %>

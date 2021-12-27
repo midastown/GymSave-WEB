@@ -49,7 +49,7 @@ router.get('/search-by-date', async (req, res) => {
 router.get('/all-sessions', async (req, res) => {
     try{
         const sessions = await Session.find()
-        res.render('sessions/all-sessions', {sessionsData: sessions})
+        res.render('sessions/all-sessions', {data: {sessionsData: sessions}})
     } catch (e) {
         res.status(500).json({message: e.message})
     }

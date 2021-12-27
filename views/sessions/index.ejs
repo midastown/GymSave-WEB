@@ -6,13 +6,5 @@
     <button id="addBtn" type="button">+</button>
     <input type="hidden" id="exerciseIndex" name="exerciseIndex" value=1>
     <input type="submit" value="Submit">
-    
 </form>
-
-<script>
-    document.getElementById("exerciseIndex").setAttribute("value", "1");
-    document.getElementById("addBtn").addEventListener("click", function() {document.getElementById("addBtn").insertAdjacentHTML('beforebegin', '</br><input type="text" name="exercise[]" placeholder="exercise"> <input type="text" name="repetitions[]" placeholder="repetitions">  <input type="text" name="series[]" placeholder="series">');
-        var index = document.getElementById("exerciseIndex");
-        index.value++;
-    });
-</script>
+<script type="text/javascript" src="js/exo-add.js"></script>
