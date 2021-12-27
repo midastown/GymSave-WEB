@@ -36,7 +36,7 @@ router.get('/search-by-date', async (req, res) => {
             }
         })
         if (sessions.toString() == "") {
-            res.json({message: "no sessions were found for the coresponding date"})
+            res.render('sessions/no-sessions-found')
         } else {
             res.render('sessions/sessions-by-date', {data: {sessionsData: sessions, startDate: start, endDate: end}})
         }
@@ -77,7 +77,7 @@ router.post('/create-session', async (req, res) => {
     
     try {
         const newSession = await session.save()
-        res.render('sessions/success-create')
+        res.render('sessions/success-add')
     } catch (e) {
         res.status(500).json({message: e.message})
     }
